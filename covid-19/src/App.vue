@@ -7,9 +7,9 @@
 </template>
 
 <script setup>
-import {useCounterStore} from "./stores/counter.ts"
-const store = useCounterStore()
-store.getList()
+import { useCounterStore } from "./stores/counter.ts";
+const store = useCounterStore();
+store.getList();
 </script>
 
 <style lang="less">

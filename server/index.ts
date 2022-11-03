@@ -4,10 +4,10 @@ import axios from "axios";
 const app: Express = express();
 const router: Router = express.Router();
 
-app.use("*",(req,res,next)=>{
-  res.header('Access-Control-Allow-Origin',"*")
-  next()
-})
+app.use("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use("/api", router);
 
 router.get("/list", async (req: Request, res: Response) => {
@@ -19,6 +19,6 @@ router.get("/list", async (req: Request, res: Response) => {
   });
 });
 
-app.listen(3333,()=>{
-    console.log('success server http://localhost:3333')
-})
+app.listen(3333, () => {
+  console.log("success server http://localhost:3333");
+});
