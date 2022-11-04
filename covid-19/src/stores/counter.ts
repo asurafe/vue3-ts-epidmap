@@ -1,14 +1,18 @@
 import { defineStore } from "pinia";
 import { getList } from "../server";
+import type { RootObject } from "./type";
+
+
 export const useCounterStore = defineStore({
   id: "counter",
   state: () => ({
-    list: {},
+    list: <RootObject>{},
   }),
   actions: {
     async getList() {
       const result = await getList();
-      console.log(result);
+      this.list = result
     },
   },
 });
+

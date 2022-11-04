@@ -1,20 +1,17 @@
-export const data = [
-  {
-    name: "内蒙古",
-    itemStyle: {
-      areaColor: "#56b1da",
-    },
-    value: [110.3467, 41.4899],
-  },
-];
-export const option = {
-  geo: {
-    map: "china",
-    aspectScale: 0.8,
-    layoutCenter: ["50%", "50%"],
-    layoutSize: "120%",
-    itemStyle: {
-      normal: {
+export default function option(
+  data: {
+    name: string;
+    value: Array<number>;
+  }[]
+) {
+  return {
+    geo: {
+      map: "china",
+      aspectScale: 0.8,
+      layoutCenter: ["50%", "50%"],
+      layoutSize: "100%",
+      itemStyle: {
+        //  normal: {
         areaColor: {
           type: "linear-gradient",
           x: 0,
@@ -37,76 +34,76 @@ export const option = {
         shadowOffsetX: 0,
         shadowOffsetY: 15,
         opacity: 0.5,
+        // },
       },
       emphasis: {
         areaColor: "#0f5d9d",
       },
-    },
-
-    regions: [
-      {
-        name: "南海诸岛",
-        itemStyle: {
-          areaColor: "rgba(0, 10, 52, 1)",
-          borderColor: "rgba(0, 10, 52, 1)",
-          opacity: 0,
+      regions: [
+        {
+          name: "南海诸岛",
+          itemStyle: {
+            areaColor: "rgba(0, 10, 52, 1)",
+            borderColor: "rgba(0, 10, 52, 1)",
+            //normal: {
+            opacity: 0,
+            label: {
+              show: false,
+              color: "#009cc9",
+            },
+            //},
+          },
           label: {
             show: false,
-            color: "#009cc9",
+            color: "#FFFFFF",
+            fontSize: 12,
           },
         },
+      ],
+    },
+    series: [
+      {
+        type: "map",
+        map: "china",
+        aspectScale: 0.8,
+        layoutCenter: ["50%", "50%"], //地图位置
+        layoutSize: "100%",
         label: {
-          show: false,
+          show: true,
           color: "#FFFFFF",
           fontSize: 12,
         },
-      },
-    ],
-  },
-  series: [
-    {
-      type: "map",
-      selectedMode: "multiple",
-      map: "china",
-      aspectScale: 0.8,
-      layoutCenter: ["50%", "50%"], //地图位置
-      layoutSize: "120%",
-      zoom: 1, //当前视角的缩放比例
-      // roam: true, //是否开启平游或缩放
-      scaleLimit: {
-        //滚轮缩放的极限控制
-        min: 1,
-        max: 2,
-      },
-      label: {
-        show: true,
-        color: "#FFFFFF",
-        fontSize: 12,
-      },
-      itemStyle: {
-        areaColor: "#0c3653",
-        borderColor: "#1cccff",
-        borderWidth: 1.8,
+        itemStyle: {
+          areaColor: "#0c3653",
+          borderColor: "#1cccff",
+          borderWidth: 1.8,
+        },
         emphasis: {
           areaColor: "#56b1da",
           label: {
-            show: false,
+            show: true,
             color: "#fff",
           },
         },
+        data: data,
       },
-      data: data,
-    },
-    {
-      type: "scatter",
-      coordinateSystem: "geo",
-      label: {
-        show: false,
+      {
+        type: "scatter",
+        coordinateSystem: "geo",
+        symbol: "pin",
+        symbolSize: [45, 45],
+        label: {
+          show: true,
+          color: "#fff",
+          formatter(value: any) {
+            return value.data.value[2];
+          },
+        },
+        itemStyle: {
+          color: "#1E90FF", //标志颜色
+        },
+        data: data,
       },
-      itemStyle: {
-        color: "#D8BC37", //标志颜色
-      },
-      data: data,
-    },
-  ],
-};
+    ],
+  };
+}
